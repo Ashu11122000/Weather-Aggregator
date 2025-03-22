@@ -1,5 +1,7 @@
 package com.weather.weather_data_aggregator.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,28 +9,24 @@ import java.time.LocalDateTime;
 
 @Document(collection = "weather_data")
 public class WeatherData {
-
     @Id
     private String id;
-
     private String city;
     private double temperature;
-    private String description;
-    private double windSpeed;
     private int humidity;
-    private LocalDateTime timeStamp;
+    private String weatherDescription;
+    private LocalDateTime timestamp;
+
 
     public WeatherData() {}
 
-    public WeatherData(String id, String city, double temperature, String description, double windSpeed, int humidity, LocalDateTime timeStamp) {
-        super();
-        this.id = id;
+
+    public WeatherData(String city, double temperature, int humidity, String weatherDescription, LocalDateTime timestamp) {
         this.city = city;
         this.temperature = temperature;
-        this.description = description;
-        this.windSpeed = windSpeed;
         this.humidity = humidity;
-        this.timeStamp = timeStamp;
+        this.weatherDescription = weatherDescription;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -55,22 +53,6 @@ public class WeatherData {
         this.temperature = temperature;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getWindSpeed() {
-        return windSpeed;
-    }
-
-    public void setWindSpeed(double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
     public int getHumidity() {
         return humidity;
     }
@@ -79,24 +61,19 @@ public class WeatherData {
         this.humidity = humidity;
     }
 
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
+    public String getWeatherDescription() {
+        return weatherDescription;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setWeatherDescription(String weatherDescription) {
+        this.weatherDescription = weatherDescription;
     }
 
-    @Override
-    public String toString() {
-        return "WeatherData{" +
-                "id='" + id + '\'' +
-                ", city='" + city + '\'' +
-                ", temperature=" + temperature +
-                ", description='" + description + '\'' +
-                ", windSpeed=" + windSpeed +
-                ", humidity=" + humidity +
-                ", timeStamp=" + timeStamp +
-                '}';
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

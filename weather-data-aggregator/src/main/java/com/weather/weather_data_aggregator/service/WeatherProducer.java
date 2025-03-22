@@ -1,24 +1,24 @@
 package com.weather.weather_data_aggregator.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WeatherProducer.class);
+
+    // It is used in a Kafka producer service to send messages to Kafka topics.
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    private static final String TOPIC = "weather_requests"; // Kafka topic name
+    // Kafka topic name
+    private static final String TOPIC = "weather_requests";
 
     public WeatherProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    // This method is responsible for sending a weather request message to an Apache Kafka topic.
     public void sendWeatherRequest(String city) {
-        LOGGER.info("Sending weather request for city: {}", city);
         kafkaTemplate.send(TOPIC, city);
     }
 }
